@@ -1,0 +1,48 @@
+@mixin quote-callout {
+    --callout-padding: var(--size-4-3);
+    --icon-size: 60px;
+    max-width: 350px;
+
+    .callout-title {
+        .callout-icon {
+            margin: 0 auto;
+        }
+
+        .callout-title-inner {
+            display: none;
+        }
+
+        .callout-fold {
+            width: 25px;
+            height: 25px;
+        }
+
+    }
+
+    .callout-content {
+        padding-top: 20px;
+
+        p {
+            font-style: italic;
+            text-align: center;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                font-style: normal;
+                color: rgb(var(--ctp-yellow, 153, 122, 0));
+                text-align: right;
+                margin-bottom: 0;
+            }
+        }
+
+    }
+}
+
+.callout[data-callout=quote] {
+    @include quote-callout;
+
+}
+

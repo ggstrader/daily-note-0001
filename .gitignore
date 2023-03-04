@@ -1,0 +1,13 @@
+*
+!.gitignore
+!*/
+
+!*.md
+!**/.obsidian/**
+!**/__Meta__/**
+!LICENSE
+
+**/node_modules
+.trash/**
+**/.history/**
+*.map

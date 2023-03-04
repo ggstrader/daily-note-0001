@@ -1,0 +1,10 @@
+{
+  "showFrontmatter": true,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "promptDelete": false,
+  "trashOption": "local",
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "showInlineTitle": false
+}

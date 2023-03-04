@@ -1,0 +1,269 @@
+
+.daily {
+    filter: sepia(0.1);
+}
+
+.theme-light {
+    --main--b: #fff9c7;
+    --main-darken: #d6d3cc;
+    --main-lighten: #fffffe;
+    --main--c: #0f111a;
+    --shadow-color-1: #0000004b;
+}
+
+.theme-dark {
+    --shadow-color-1: #0000007c;
+    --main--b: hsl(80, 2%, 10%);
+    --main--b-hsl: 80, 2%, 8%;
+    --main-lighten: hsla(225, 25%, 7%, .8);
+    --main-darken: hsla(0, 0%, 75%, .7) !important;
+    --main--c: #f8f8f8;
+}
+
+.theme-dark, .theme-light {
+    --cc-progress-border: 1px solid #726b4b7a;
+    --cc-progress-data-top: 2.4em;
+    --cc-progress-data-font-size: .9em;
+    --cc-progress-data-left: calc(50% - 1.0rem);
+    --cc-progress-data-color: rgba(0, 0, 0, 0.829);
+    --cc-progress-data-shadow: 0 0 10px white, 0 0 10px white, 0 0 10px white;
+
+    --cc-daily-progress-height: 1rem;
+    --cc-daily-progress-stroke-color: rgba(0, 0, 0, 0.459);
+    --cc-daily-progress-filter: contrast(1.2);
+    --cc-daily-progress-bottom-margin: 1rem;
+
+    --cc-daily-collection-padding: 0.5vw 1vw;
+    --cc-daily-collection-filter: brightness(90%);
+    --cc-daily-background-image: url("https://i.ibb.co/j8fVf0q/image8.jpg");
+    // You can use the local image in .obsidian/images folder by replacing the absolute path here:
+    // --cc-daily-background-image: url("app://local/C:/PATH/TO/VAULT/.obsidian/images/image8.jpg");
+    --cc-daily-background-size: 1000px 1000px;
+    --cc-daily-background-position: 15% 0%;
+
+
+    --cc-prominent-text-font-size: 1.15rem;
+    --cc-prominent-text-font-weight: 900;
+    --cc-prominent-margin-bottom: 2rem;
+    --cc-daily-hidden-frontmatter-compensation: 19rem;
+}
+
+.workspace-leaf-content[data-type=daily-note-editor-view] {
+    --cc-progress-data-top: 2.4em !important;
+    --cc-daily-hidden-frontmatter-compensation: 19rem !important;
+}
+
+@import "./scss_parts/daily.scss";
+@import "./scss_parts/quote_callout.scss";
+
+
+@mixin cc-progress {
+    progress {
+        height: 100%;
+
+        &::-webkit-progress-bar {
+            background-color: hsla(var(--main--b-hsl), 0.35);
+            border: var(--cc-progress-border);
+            border-radius: 15px;
+            box-shadow: 3px 3px 8px var(--main-lighten), -3px -3px 8px var(--main-darken);
+            position: relative;
+        }
+
+        &::-webkit-progress-value {
+            background-image: linear-gradient(to right, hsl(39, 100%, 48%), #ffed84);
+            border-radius: 15px;
+            position: absolute;
+        }
+
+        &::before {
+            content: attr(data-label);
+            font-size: var(--cc-progress-data-font-size);
+            position: absolute;
+            top: var(--cc-progress-data-top);
+            text-align: center;
+            z-index: 1;
+            color: var(--cc-progress-data-color);
+            left: var(--cc-progress-data-left);
+            transform: translateX(-50%);
+            text-shadow: var(--cc-progress-data-shadow);
+        }
+    }
+}
+
+@mixin cc-prominent-text {
+    text-shadow: 0px 3px 0px #0000002c,
+        0px 14px 10px rgba(0, 0, 0, 0.056),
+        0px 24px 2px rgba(0, 0, 0, 0.015),
+        0px 34px 30px rgba(0, 0, 0, 0.05);
+    -webkit-text-fill-color: var(--main--b);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.137);
+
+    font-size: var(--cc-prominent-text-font-size);
+    font-weight: var(--cc-prominent-text-font-weight);
+    margin-bottom: var(--cc-prominent-margin-bottom);
+    // filter: brightness(120%) saturate(120%) contrast(100%);
+    // display: block;
+
+    h2 {
+        font-size: calc(var(--cc-prominent-text-font-size) - 0.2rem);
+    }
+
+}
+
+@mixin cc-title-base {
+    @include cc-center;
+
+    h1 {
+        background-clip: text;
+        background-image: var(--cc-daily-background-image);
+        background-attachment: fixed;
+        color: transparent;
+        font-size: 3em;
+        font-weight: 900;
+        opacity: 0.99 !important;
+        -webkit-background-clip: text;
+        filter: brightness(120%) saturate(120%) contrast(100%) !important;
+        margin: 0 !important;
+
+        margin-bottom: .4rem !important;
+        padding: 0 !important;
+    }
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    filter: drop-shadow(0px 0px 3px var(--shadow-color-1)) drop-shadow(0px 0px 3px var(--shadow-color-1)) drop-shadow(0px 0px 3px var(--shadow-color-1));
+
+}
+
+@mixin cc-large-title {
+    @include cc-title-base;
+
+    h1 {
+        text-transform: uppercase;
+        letter-spacing: .8rem;
+        margin-bottom: 2rem !important;
+
+    }
+}
+
+@mixin cc-large-title-secondary {
+    @include cc-title-base;
+
+    h1 {
+        font-size: 2em;
+        letter-spacing: 1rem;
+        margin-top: -4rem !important;
+
+    }
+}
+
+@mixin cc-center {
+    min-width: 625px;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+@mixin cc-inset {
+    @include cc-center;
+    border-radius: 4rem;
+    box-shadow: inset 0px 10px 12px var(--main-darken), inset 0px -10px 12px var(--main-lighten);
+    padding: 2em;
+    padding-left: 3em !important;
+    padding-right: 3em !important;
+    height: auto;
+
+    h1 {
+        @include cc-prominent-text;
+    }
+}
+
+@mixin cc-daily-collection {
+    @include cc-inset;
+    @include cc-center;
+    padding: var(--cc-daily-collection-padding);
+    height: auto;
+    width: 100%;
+    background-image: var(--cc-daily-background-image);
+    background-size: var(--cc-daily-background-size);
+    background-position: var(--cc-daily-background-position);
+    background-attachment: fixed;
+    filter: var(--cc-daily-collection-filter) !important;
+
+    ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-auto-rows: minmax(50px, auto) !important;
+        grid-gap: 10px !important;
+        list-style: none !important;
+    }
+}
+
+
+@mixin cc-daily-progress {
+    margin-bottom: var(--cc-daily-progress-bottom-margin);
+    font-size: var(--font-normal);
+    grid-column: span 2 !important;
+    position: relative;
+    filter: var(--cc-daily-progress-filter) !important;
+
+    .list-bullet {
+        display: none;
+    }
+
+    .bar {
+        @include cc-progress;
+        height: var(--cc-daily-progress-height);
+        box-sizing: border-box;
+    }
+
+    &:nth-child(2n+1):not(:last-child) {
+        grid-column: 1 / span 1 !important;
+    }
+
+    &:nth-child(2n):not(:last-child) {
+        grid-column: 2 / span 1 !important;
+    }
+
+    .internal-link {
+        @include cc-prominent-text;
+        -webkit-text-stroke-color: var(--cc-daily-progress-stroke-color);
+    }
+}
+
+
+
+
+.cc-prominent-text {
+    @include cc-prominent-text;
+}
+
+.cc-large-title {
+    @include cc-large-title;
+}
+
+.cc-large-title-secondary {
+    @include cc-large-title-secondary;
+}
+
+.cc-center {
+    @include cc-center;
+}
+
+.cc-inset {
+    @include cc-inset;
+}
+
+.cc-daily-collection {
+    @include cc-daily-collection;
+}
+
+.cc-daily-progress {
+    @include cc-daily-progress;
+}
